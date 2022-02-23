@@ -1,5 +1,4 @@
 #Minecraft server properties
-#Tue Feb 22 22:03:20 AST 2022
 enable-jmx-monitoring=false
 rcon.port=25575
 gamemode=survival
