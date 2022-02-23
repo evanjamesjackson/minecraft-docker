@@ -1,5 +1,10 @@
-world/
-world_the_end/
-world_nether/
+data/world/
+data/world_the_end/
+data/world_nether/
 .env
-server.properties
+config/banned-ips.json
+config/banned-players.json
+config/geyser-config.yml
+config/ops.json
+config/server.properties
+config/whitelist.json

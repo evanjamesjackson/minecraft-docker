@@ -9,15 +9,19 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./server.properties:/minecraft/server.properties
-      - ./geyser-config.yml:/minecraft/plugins/Geyser-Spigot/config.yml
-      - ./world:/minecraft/world
-      - ./world_nether:/minecraft/world_nether
-      - ./world_the_end:/minecraft/world_the_end
+      - ./config/banned-ips.json:/minecraft/banned-ips.json
+      - ./config/banned-players.json:/minecraft/banned-players.json
+      - ./config/ops.json:/minecraft/ops.json
+      - ./config/whitelist.json:/minecraft/whitelist.json
+      - ./config/server.properties:/minecraft/server.properties
+      - ./config/geyser-config.yml:/minecraft/plugins/Geyser-Spigot/config.yml
+      - ./data/world:/minecraft/world
+      - ./data/world_nether:/minecraft/world_nether
+      - ./data/world_the_end:/minecraft/world_the_end
     ports:
       - "25565:25565" # Java port
       - "19132:19132" # Bedrock port
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
-
+      - JAVA_OPTIONS=${JAVA_OPTIONS}
