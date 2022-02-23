@@ -6,8 +6,8 @@ WORKDIR /minecraft
 ENV TZ=America/Halifax
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Update and install software
-RUN apt update
-RUN apt install git openjdk-17-jdk -y
+RUN apt-get update
+RUN apt-get install git openjdk-17-jdk -y
 
 # Build Spigot
 ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar ./BuildTools.jar
