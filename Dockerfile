@@ -9,7 +9,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update
 RUN apt install git openjdk-17-jdk -y
 
-# Build spigot
+# Build Spigot
 ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar ./BuildTools.jar
 RUN java -jar ./BuildTools.jar
 RUN echo eula=true > ./eula.txt
