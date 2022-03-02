@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   spigot-geysermc-floodgate:
-    container_name: spigot-geysermc-floodgate
+    container_name: minecraft
     image: spigot-geysermc-floodgate
     build:
       context: .
