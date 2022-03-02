@@ -1,4 +1,3 @@
-# spigot-geysermc-floodgate-docker
 Docker container combining [Spigot](https://www.spigotmc.org/), [GeyserMC](http://geysermc.org/) and [Floodgate](https://wiki.geysermc.org/floodgate/).
 
 ## Setup
