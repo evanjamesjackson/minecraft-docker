@@ -1,2 +1,2 @@
 #!/bin/bash
-java $OPTIONS -jar spigot-1.18.1.jar nogui
+java $OPTIONS -jar spigot-1.18.2.jar nogui
