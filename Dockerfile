@@ -11,7 +11,7 @@ RUN apt-get install git openjdk-17-jdk -y
 
 # Build Spigot
 ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar ./BuildTools.jar
-RUN java -jar ./BuildTools.jar
+RUN java -jar ./BuildTools.jar --rev 1.18.2
 RUN echo eula=true > ./eula.txt
 
 # Add GeyserMC and Floodgate plugins
