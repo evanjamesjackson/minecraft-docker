@@ -22,6 +22,4 @@ services:
       - "25565:25565" # Java port
       - "19132:19132" # Bedrock port
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - JAVA_OPTIONS=${JAVA_OPTIONS}
