@@ -7,7 +7,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     restart: always
+    user: "${UID}:${GID}"
     volumes:
       - ./config/banned-ips.json:/minecraft/banned-ips.json
       - ./config/banned-players.json:/minecraft/banned-players.json

@@ -7,10 +7,11 @@ ENV TZ=America/Halifax
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Update and install software
 RUN apt-get update
-RUN apt-get install git openjdk-17-jdk -y
+RUN apt-get install --no-install-recommends git openjdk-17-jdk -y
 
 # Build Spigot
 ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar ./BuildTools.jar
+RUN ls -l ./BuildTools.jar
 RUN java -jar ./BuildTools.jar --rev 1.18.2
 RUN echo eula=true > ./eula.txt
 
@@ -21,4 +22,13 @@ ADD https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/lastSuccessf
 # Copy entrypoint script into the container
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
+
+# Setup user permissions
+ARG UID
+ARG GID
+RUN useradd -ms /bin/bash minecraft && \
+	usermod -u $UID minecraft && \
+	groupmod -g $GID minecraft
+RUN chown -R minecraft:minecraft . 
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
