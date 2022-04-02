@@ -1,4 +1,4 @@
-This is a Docker container which conveniently combines [Spigot](https://www.spigotmc.org/), [GeyserMC](http://geysermc.org/) and [Floodgate](https://wiki.geysermc.org/floodgate/).
+This is a Docker container which conveniently combines [Spigot](https://www.spigotmc.org/), [GeyserMC](http://geysermc.org/) and [Floodgate](https://wiki.geysermc.org/floodgate/). This will allow you to run a Minecraft Java Edition server that Bedrock Edition clients can still log into. 
 
 ## Setup
 1. Clone the repository.
