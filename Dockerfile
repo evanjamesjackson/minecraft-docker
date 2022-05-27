@@ -31,4 +31,6 @@ RUN useradd -ms /bin/bash minecraft && \
 	groupmod -g $GID minecraft
 RUN chown -R minecraft:minecraft . 
 
+USER minecraft
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
