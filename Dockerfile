@@ -10,9 +10,11 @@ RUN apt-get update
 RUN apt-get install --no-install-recommends git openjdk-17-jdk -y
 
 # Build Spigot
+ARG MINECRAFT_VERSION
+ENV MINECRAFT_VERSION=$MINECRAFT_VERSION
 ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar ./BuildTools.jar
 RUN ls -l ./BuildTools.jar
-RUN java -jar ./BuildTools.jar --rev 1.19
+RUN java -jar ./BuildTools.jar --rev $MINECRAFT_VERSION
 RUN echo eula=true > ./eula.txt
 
 # Add GeyserMC and Floodgate plugins
