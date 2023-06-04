@@ -18,8 +18,8 @@ RUN java -jar ./BuildTools.jar --rev $MINECRAFT_VERSION
 RUN echo eula=true > ./eula.txt
 
 # Add GeyserMC and Floodgate plugins
-ADD https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar ./plugins/Geyser-Spigot.jar
-ADD https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/lastSuccessfulBuild/artifact/spigot/target/floodgate-spigot.jar ./plugins/floodgate-spigot.jar
+ADD https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot ./plugins/Geyser-Spigot.jar
+ADD https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot ./plugins/floodgate-spigot.jar
 
 # Copy entrypoint script into the container
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
