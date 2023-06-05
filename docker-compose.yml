@@ -8,11 +8,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        UID: ${UID}
-        GID: ${GID}
         MINECRAFT_VERSION: ${MINECRAFT_VERSION}
     restart: always
-    user: "${UID}:${GID}"
     volumes:
       - ./config/banned-ips.json:/minecraft/banned-ips.json
       - ./config/banned-players.json:/minecraft/banned-players.json
@@ -20,11 +17,12 @@ services:
       - ./config/whitelist.json:/minecraft/whitelist.json
       - ./config/server.properties:/minecraft/server.properties
       - ./config/geyser-config.yml:/minecraft/plugins/Geyser-Spigot/config.yml
-      - ./data/world:/minecraft/world
-      - ./data/world_nether:/minecraft/world_nether
-      - ./data/world_the_end:/minecraft/world_the_end
+      - world:/minecraft/world
     ports:
-      - "25565:25565" # Java port
-      - "19132:19132" # Bedrock port
+      - "${JAVA_PORT}:25565" # Java port
+      - "${BEDROCK_PORT}:19132" # Bedrock port
     environment:
       - JAVA_OPTIONS=${JAVA_OPTIONS}
+
+volumes:
+  world:
