@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
 # Set timezone so installing tzdata doesn't cause things to hang
 ARG TZ
