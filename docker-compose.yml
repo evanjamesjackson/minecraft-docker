@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
       args:
         MINECRAFT_VERSION: ${MINECRAFT_VERSION}
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./config/banned-ips.json:/minecraft/banned-ips.json
       - ./config/banned-players.json:/minecraft/banned-players.json
