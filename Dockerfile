@@ -20,9 +20,6 @@ RUN echo eula=true > /minecraft/eula.txt
 ADD https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot /minecraft/plugins/Geyser-Spigot.jar
 ADD https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot /minecraft/plugins/floodgate-spigot.jar
 
-# Copy entrypoint script into the container
-COPY ./docker-entrypoint.sh /minecraft/docker-entrypoint.sh
-
 WORKDIR /minecraft
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
+ENTRYPOINT java $JAVA_OPTIONS -jar spigot-$MINECRAFT_VERSION.jar nogui
