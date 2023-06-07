@@ -18,8 +18,8 @@ services:
       - ./config/geyser-config.yml:/minecraft/plugins/Geyser-Spigot/config.yml
       - world:/minecraft/world
     ports:
-      - "${JAVA_PORT}:25565" # Java port
-      - "${BEDROCK_PORT}:19132" # Bedrock port
+      - "${JAVA_PORT}:25565/tcp" # Java port
+      - "${BEDROCK_PORT}:19132/udp" # Bedrock port
     environment:
       - JAVA_OPTIONS=${JAVA_OPTIONS}
 
