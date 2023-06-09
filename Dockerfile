@@ -6,8 +6,8 @@ ENV TZ=$TZ
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Update and install software
-RUN apt-get update
-RUN apt-get install --no-install-recommends git openjdk-17-jdk -y
+RUN apt update
+RUN apt install --no-install-recommends git openjdk-17-jdk -y
 
 # Build Spigot
 ARG MINECRAFT_VERSION
