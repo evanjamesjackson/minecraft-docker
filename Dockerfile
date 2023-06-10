@@ -22,4 +22,4 @@ ADD https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/l
 
 WORKDIR /minecraft
 
-ENTRYPOINT java $JAVA_OPTIONS -jar spigot-$MINECRAFT_VERSION.jar nogui
+ENTRYPOINT java $JAVA_OPTIONS -jar spigot-$MINECRAFT_VERSION.jar --nogui

@@ -2,7 +2,6 @@ version: "3.4"
 
 services:
   minecraft:
-    container_name: minecraft
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,12 +15,11 @@ services:
       - ./config/whitelist.json:/minecraft/whitelist.json
       - ./config/server.properties:/minecraft/server.properties
       - ./config/geyser-config.yml:/minecraft/plugins/Geyser-Spigot/config.yml
-      - world:/minecraft/world
+      - ./worlds/world:/minecraft/world
+      - ./worlds/world_the_end:/minecraft/world_the_end
+      - ./worlds/world_nether:/minecraft/world_nether
     ports:
-      - "${JAVA_PORT}:25565/tcp" # Java port
-      - "${BEDROCK_PORT}:19132/udp" # Bedrock port
+      - "${JAVA_PORT}:25565/tcp"
+      - "${BEDROCK_PORT}:19132/udp"
     environment:
       - JAVA_OPTIONS=${JAVA_OPTIONS}
-
-volumes:
-  world:
