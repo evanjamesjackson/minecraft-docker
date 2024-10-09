@@ -5,7 +5,6 @@ services:
       dockerfile: Dockerfile
       args:
         MINECRAFT_VERSION: ${MINECRAFT_VERSION}
-        TZ: ${TZ}
     restart: unless-stopped
     volumes:
       - ./config/banned-ips.json:/home/minecraft/banned-ips.json
