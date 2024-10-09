@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
 
-concurrency: 
+concurrency:
   group: ${{ github.repository }}__${{ github.ref }}
   cancel-in-progress: true
 
@@ -43,13 +43,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: ${{ env.MINECRAFT_VERSION }},latest
-      
+
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
-					build-args: |
-					  MINECRAFT_VERSION=${{ env.MINECRAFT_VERSION }}
+          build-args: |
+            MINECRAFT_VERSION=${{ env.MINECRAFT_VERSION }}
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
