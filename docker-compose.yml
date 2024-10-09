@@ -1,10 +1,6 @@
 services:
   minecraft:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        MINECRAFT_VERSION: ${MINECRAFT_VERSION}
+    image: ghcr.io/evanjamesjackson/minecraft-docker:${MINECRAFT_VERSION}
     restart: unless-stopped
     volumes:
       - ./config/banned-ips.json:/home/minecraft/banned-ips.json
