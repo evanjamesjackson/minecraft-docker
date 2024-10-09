@@ -5,19 +5,28 @@ services:
       dockerfile: Dockerfile
       args:
         MINECRAFT_VERSION: ${MINECRAFT_VERSION}
+        TZ: ${TZ}
     restart: unless-stopped
     volumes:
-      - ./config/banned-ips.json:/minecraft/banned-ips.json
-      - ./config/banned-players.json:/minecraft/banned-players.json
-      - ./config/ops.json:/minecraft/ops.json
-      - ./config/whitelist.json:/minecraft/whitelist.json
-      - ./config/server.properties:/minecraft/server.properties
-      - ./config/geyser-config.yml:/minecraft/plugins/Geyser-Spigot/config.yml
-      - ./worlds/world:/minecraft/world
-      - ./worlds/world_the_end:/minecraft/world_the_end
-      - ./worlds/world_nether:/minecraft/world_nether
+      - ./config/banned-ips.json:/home/minecraft/banned-ips.json
+      - ./config/banned-players.json:/home/minecraft/banned-players.json
+      - ./config/ops.json:/home/minecraft/ops.json
+      - ./config/whitelist.json:/home/minecraft/whitelist.json
+      - ./config/server.properties:/home/minecraft/server.properties
+      - ./config/geyser-config.yml:/home/minecraft/plugins/Geyser-Spigot/config.yml
+      - minecraft_world:/home/minecraft/world
+      - minecraft_world_the_end:/home/minecraft/world_the_end
+      - minecraft_world_nether:/home/minecraft/world_nether
     ports:
       - "${JAVA_PORT}:25565/tcp"
       - "${BEDROCK_PORT}:19132/udp"
     environment:
       - JAVA_OPTIONS=${JAVA_OPTIONS}
+      - PUID=${PUID}
+      - PGID=${PGID}
+
+volumes:
+  minecraft_world:
+  minecraft_world_the_end:
+  minecraft_world_nether:
+

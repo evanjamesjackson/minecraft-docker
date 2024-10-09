@@ -5,6 +5,3 @@ config/geyser-config.yml
 config/ops.json
 config/server.properties
 config/whitelist.json
-worlds/world
-worlds/world_the_end
-worlds/world_nether

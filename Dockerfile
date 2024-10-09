@@ -1,25 +1,32 @@
-FROM ubuntu:latest
+FROM eclipse-temurin:21
 
-# Set timezone so installing tzdata doesn't cause things to hang
-ARG TZ
-ENV TZ=$TZ
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt update; \
+	apt-get install -y --no-install-recommends adduser git; \
+	rm -rf /var/lib/apt/lists/*
 
-# Update and install software
-RUN apt update
-RUN apt install --no-install-recommends git openjdk-17-jdk -y
+# Minecraft user
+RUN adduser minecraft
 
 # Build Spigot
 ARG MINECRAFT_VERSION
-ENV MINECRAFT_VERSION=$MINECRAFT_VERSION
-ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar /minecraft/BuildTools.jar
-RUN cd /minecraft && java -jar /minecraft/BuildTools.jar --rev $MINECRAFT_VERSION
-RUN echo eula=true > /minecraft/eula.txt
+ENV MINECRAFT_VERSION=${MINECRAFT_VERSION}
+ADD --chown=minecraft:minecraft https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar /home/minecraft/BuildTools.jar
+RUN cd /home/minecraft; \
+	java -jar /home/minecraft/BuildTools.jar --rev $MINECRAFT_VERSION; \
+	echo eula=true > eula.txt
 
 # Add GeyserMC and Floodgate plugins
-ADD https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot /minecraft/plugins/Geyser-Spigot.jar
-ADD https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot /minecraft/plugins/floodgate-spigot.jar
+ADD --chown=minecraft:minecraft https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot /home/minecraft/plugins/Geyser-Spigot.jar
+ADD --chown=minecraft:minecraft https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot /home/minecraft/plugins/floodgate-spigot.jar
 
-WORKDIR /minecraft
+# Create directories for worlds (will be volume-mapped)
+RUN mkdir -p /home/minecraft/world; \
+	mkdir -p /home/minecraft/world_the_end; \
+	mkdir -p /home/minecraft/world_nether
 
-ENTRYPOINT java $JAVA_OPTIONS -jar spigot-$MINECRAFT_VERSION.jar --nogui
+# Set proper permissions on minecraft directory
+RUN chown -R minecraft:minecraft /home/minecraft
+
+WORKDIR /home/minecraft
+COPY start.sh /home/minecraft/start.sh
+CMD ["/home/minecraft/start.sh"]
