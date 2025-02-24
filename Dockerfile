@@ -11,7 +11,8 @@ RUN adduser minecraft
 ARG MINECRAFT_VERSION
 ENV MINECRAFT_VERSION=${MINECRAFT_VERSION}
 ADD --chown=minecraft:minecraft https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar /home/minecraft/BuildTools.jar
-RUN cd /home/minecraft; \
+RUN set -eux; \
+	cd /home/minecraft; \
 	java -jar /home/minecraft/BuildTools.jar --rev $MINECRAFT_VERSION; \
 	echo eula=true > eula.txt
 
