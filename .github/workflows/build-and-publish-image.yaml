@@ -47,7 +47,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=${{ env.MINECRAFT_VERSION }}
+            type=raw,value=${{ matrix.minecraft_version }}
             type=raw,value=latest
 
       - name: Build Docker image
