@@ -11,7 +11,6 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: evanjamesjackson/minecraft
-  MINECRAFT_VERSION: "1.20.1"
 
 jobs:
   build-and-publish-image:
@@ -19,6 +18,10 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+    strategy:
+      matrix:
+        minecraft_version: ["1.20.1", "1.21"]
 
     steps:
       - name: Checkout repository
@@ -52,7 +55,7 @@ jobs:
         with:
           context: .
           build-args: |
-            MINECRAFT_VERSION=${{ env.MINECRAFT_VERSION }}
+            MINECRAFT_VERSION=${{ matrix.minecraft_version }}
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
